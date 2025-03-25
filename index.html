@@ -53,13 +53,15 @@
             background-color: #4C1D95;
         }
 
-        .upload-input {
-            display: none;
+        .example-images {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
         }
 
-        .image-preview {
-            margin-top: 20px;
-            max-width: 100%;
+        .example-images img {
+            max-width: 45%;
             border-radius: 12px;
         }
 
@@ -78,45 +80,16 @@
     </header>
 
     <div class="container">
-        <button class="cta-button" onclick="triggerUpload()">Upload Your Photo or Video</button>
-        <input type="file" accept="image/*,video/*" id="upload" class="upload-input" onchange="previewMedia(event)">
+        <button class="cta-button" onclick="window.location.href='upload.html'">Try It Yourself</button>
 
-        <div id="preview-container"></div>
+        <div class="example-images">
+            <img src="woman-outfit1.jpg" alt="Woman with outfit and hairstyle 1">
+            <img src="woman-outfit2.jpg" alt="Woman with outfit and hairstyle 2">
+        </div>
     </div>
 
     <footer>
         © 2025 Renaissance. All rights reserved.
     </footer>
-
-    <script>
-        function triggerUpload() {
-            document.getElementById('upload').click();
-        }
-
-        function previewMedia(event) {
-            const previewContainer = document.getElementById('preview-container');
-            previewContainer.innerHTML = '';
-
-            const file = event.target.files[0];
-            const reader = new FileReader();
-
-            reader.onload = function(e) {
-                let media;
-                if (file.type.startsWith('image/')) {
-                    media = document.createElement('img');
-                    media.className = 'image-preview';
-                } else if (file.type.startsWith('video/')) {
-                    media = document.createElement('video');
-                    media.className = 'image-preview';
-                    media.controls = true;
-                }
-
-                media.src = e.target.result;
-                previewContainer.appendChild(media);
-            }
-
-            reader.readAsDataURL(file);
-        }
-    </script>
 </body>
 </html>
