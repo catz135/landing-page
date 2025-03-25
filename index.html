@@ -3,10 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Landing Page</title>
+    <title>Renaissance | AI Fashion Visualizer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 36px;
+            font-weight: 700;
+            color: #5B21B6;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: #6B7280;
+        }
+
+        .container {
+            max-width: 700px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .cta-button {
+            background-color: #5B21B6;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .cta-button:hover {
+            background-color: #4C1D95;
+        }
+
+        .upload-input {
+            display: none;
+        }
+
+        .image-preview {
+            margin-top: 20px;
+            max-width: 100%;
+            border-radius: 12px;
+        }
+
+        footer {
+            margin-top: 40px;
+            font-size: 14px;
+            color: #9CA3AF;
+            padding-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to My Landing Page</h1>
-    <p>This is a simple webpage.</p>
+    <header>
+        <div class="logo">Renaissance</div>
+        <div class="subtitle">Instantly visualize fashion, hair, and makeup using the power of GenAI.</div>
+    </header>
+
+    <div class="container">
+        <button class="cta-button" onclick="triggerUpload()">Upload Your Photo or Video</button>
+        <input type="file" accept="image/*,video/*" id="upload" class="upload-input" onchange="previewMedia(event)">
+
+        <div id="preview-container"></div>
+    </div>
+
+    <footer>
+        © 2025 Renaissance. All rights reserved.
+    </footer>
+
+    <script>
+        function triggerUpload() {
+            document.getElementById('upload').click();
+        }
+
+        function previewMedia(event) {
+            const previewContainer = document.getElementById('preview-container');
+            previewContainer.innerHTML = '';
+
+            const file = event.target.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                let media;
+                if (file.type.startsWith('image/')) {
+                    media = document.createElement('img');
+                    media.className = 'image-preview';
+                } else if (file.type.startsWith('video/')) {
+                    media = document.createElement('video');
+                    media.className = 'image-preview';
+                    media.controls = true;
+                }
+
+                media.src = e.target.result;
+                previewContainer.appendChild(media);
+            }
+
+            reader.readAsDataURL(file);
+        }
+    </script>
 </body>
 </html>
+
